@@ -1,10 +1,29 @@
 import { EthereumClient, modalConnectors, walletConnectProvider } from '@web3modal/ethereum'
 import type { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
-import { configureChains, createClient, WagmiConfig } from 'wagmi'
+import { Chain, configureChains, createClient, WagmiConfig } from 'wagmi'
 import { arbitrum, avalanche, bsc, fantom, mainnet, optimism, polygon } from 'wagmi/chains'
 import Navigation from '../components/Navigation'
 import '../styles.css'
+
+export const palette: Chain = {
+  id: 102,
+  name: 'PLT TempNet1',
+  network: 'PLT TempNet1',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Palette',
+    symbol: ' ',
+  },
+  rpcUrls: {
+    default: { http: ['https://tempnet-1.palette-rpc.com:22000'] },
+  },
+  blockExplorers: {
+    etherscan: { name: 'palettescan', url: 'https://dev.palettescan.com/' },
+    default: { name: 'palettescan', url: 'https://dev.palettescan.com/' },
+  },
+  testnet: true,
+}
 
 // 1. Get projectID at https://cloud.walletconnect.com
 if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
@@ -14,7 +33,7 @@ if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
 
 // 2. Configure wagmi client
-const chains = [mainnet, polygon, optimism, arbitrum, avalanche, fantom, bsc]
+const chains = [mainnet, polygon, optimism, arbitrum, avalanche, fantom, bsc, palette]
 const { provider } = configureChains(chains, [walletConnectProvider({ projectId })])
 export const wagmiClient = createClient({
   autoConnect: true,

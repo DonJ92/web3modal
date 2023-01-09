@@ -12,7 +12,7 @@ export function walletConnectProvider({ projectId }: WalletConnectProviderOpts) 
   return jsonRpcProvider({
     rpc: chain => {
       const supportedChains = [
-        1, 3, 4, 5, 10, 42, 56, 69, 97, 100, 137, 420, 42161, 42220, 43114, 80001, 421611, 421613,
+        1, 3, 4, 5, 10, 42, 56, 69, 97, 100, 102, 137, 420, 42161, 42220, 43114, 80001, 421611, 421613,
         1313161554, 11297108109
       ]
 
